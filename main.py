@@ -2,16 +2,19 @@ import os
 from flask import Flask, render_template, render_template_string, url_for, jsonify, request, redirect
 import json
 import secrets
+import pymongo
+from pymongo import MongoClient
 
 
+
+sdb = MongoClient(os.environ["spdb"])
+sdbc = sdb["qna"]["query"]
+value = os.environ["token"]
+docs = sdbc.find()
 
 
 
 app = Flask('app')
-value = os.environ["token"]
-
-
-
 
 @app.route('/')
 def hello_world():
@@ -49,14 +52,7 @@ def verify():
 		return "<script>window.location.href='https://dbm.sourav87.repl.co/dashboard'</script>"
 	return "<script>window.location.href='https://dbm.sourav87.repl.co/login'</script>"
 		
-dta = [{
-  "name":"hunter87",
-  "age" : 19
-},
-{
-  "name" : "sourav",
-  "age" : 19
-}]
+
 	
 @app.route("/dashboard")
 def dash():
@@ -64,7 +60,7 @@ def dash():
 	data = request.cookies.get(key)
 	print(data)
 	#dta = {"name" : "hunter87", "age" : 19}
-	return render_template("index.html", token=value, list=dta)
+	return render_template("index.html", token=value, list=docs)
 	
 
 app.run(host='0.0.0.0', port=8080)
