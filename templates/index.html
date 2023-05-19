@@ -580,7 +580,9 @@ nav.close ~ .dashboard .top{
                 <div class="activity-data">
                     <div class="data names">
                         <span class="data-title">Name</span>
-                        <span class="data-list">Prem Shahi</span>
+                        {% for i in list %}
+                        <span class="data-list">{{ i['name'] }}</span>
+                        {% endfor %}
                         <span class="data-list">Deepa Chand</span>
                         <span class="data-list">Manisha Chand</span>
                         <span class="data-list">Pratima Shahi</span>
