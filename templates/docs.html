@@ -1,0 +1,60 @@
+<body>
+<style>
+body{
+	background: #242323;
+}
+	.queries{
+	background: #6239bf;
+	padding: 10px;
+	margin-bottom:10px;
+}
+.queries input{
+	background: #fff;
+	color:#000;
+	height: 30px;
+	width: auto;
+	text-align:left;
+	border: none;
+	border-radius:5px;
+	margin-bottom:3px;
+}
+.queries button{
+	background:#4b8bfa ;
+	color: #fff;
+	border-radius:5px;
+	height: 30px;
+	width: auto;
+	text-align:center;
+	border:none;
+	padding: 3px;
+}
+</style>
+<form class="data email queries" action="https://dbm.sourav87.repl.co/add" method="POST">
+			<input name="q" >
+			<input name="a" >
+			<button type="submit">Add New</button>
+		</form>
+		<br>
+		{% for i in list %}
+		<form class="data email queries" action="https://dbm.sourav87.repl.co/add" method="POST">
+			<input name="q" value="{{i['q']}}">
+			<input name="a" value="{{i['a']}}">
+			<button type="submit">Update</button>
+		</form>
+		<br>
+		{% endfor %}
+
+<input id="tkn" style="display:none;" value="{{token}}">
+<form style="display: none;" action="https://dbm.sourav87.repl.co/v2" method="POST">
+<input id="hd-key" name="key">
+<button id="hd-sub" type="submit"></button>
+<script>
+var key = localStorage.getItem('token');
+var token = document.querySelector("#tkn").value;
+var hdkey  = document.querySelector("#hd-key").value  = key;
+var hdsub = document.querySelector("#hd-sub")
+if(key != token){
+	hdsub.click()
+}
+</script>
+</body>

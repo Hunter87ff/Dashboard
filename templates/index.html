@@ -9,7 +9,13 @@
     <link rel="stylesheet" href="style.css">
      
     <!----===== Iconscout CSS ===== -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+	
+	<!--
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">-->
+
     <title>Dashboard</title> 
 	<style>
 		/* ===== Google Font Import - Poppins ===== */
@@ -374,7 +380,31 @@ nav.close ~ .dashboard .top{
     white-space: nowrap;
     color: var(--text-color);
 }
-
+.queries{
+	background: #6239bf;
+	padding: 10px;
+	margin-bottom:10px;
+}
+.queries input{
+	background: #fff;
+	color:#000;
+	height: 30px;
+	width: auto;
+	text-align:left;
+	border: none;
+	border-radius:5px;
+	margin-bottom:3px;
+}
+.queries button{
+	background:#4b8bfa ;
+	color: #fff;
+	border-radius:5px;
+	height: 30px;
+	width: auto;
+	text-align:center;
+	border:none;
+	padding: 3px;
+}
 @media (max-width: 1000px) {
     nav{
         width: 73px;
@@ -488,40 +518,40 @@ nav.close ~ .dashboard .top{
         <div class="menu-items">
             <ul class="nav-links">
                 <li><a href="#">
-                    <i class="uil uil-estate"></i>
+                    <i class='bx bx-home'></i>
                     <span class="link-name">Dahsboard</span>
                 </a></li>
                 <li><a href="#">
-                    <i class="uil uil-files-landscapes"></i>
+                    <i class='bx bx-folder-open'></i>
                     <span class="link-name">Documents</span>
                 </a></li>
                 <li><a href="#">
-                    <i class="uil uil-chart"></i>
+                    <i class='bx bxs-pie-chart-alt-2'></i>
                     <span class="link-name">Analytics</span>
                 </a></li>
                 <li><a href="#">
-                    <i class="uil uil-thumbs-up"></i>
+                    <i class='bx bx-like'></i>
                     <span class="link-name">Like</span>
                 </a></li>
                 <li><a href="#">
-                    <i class="uil uil-comments"></i>
+                    <i class='bx bx-message-square-dots'></i>
                     <span class="link-name">Comment</span>
                 </a></li>
                 <li><a href="#">
-                    <i class="uil uil-share"></i>
+                    <i class='bx bx-share-alt'></i>
                     <span class="link-name">Share</span>
                 </a></li>
             </ul>
             
             <ul class="logout-mode">
                 <li><a href="#">
-                    <i class="uil uil-signout"></i>
+                    <i class='bx bx-log-out'></i>
                     <span class="link-name">Logout</span>
                 </a></li>
 
                 <li class="mode">
                     <a href="#">
-                        <i class="uil uil-moon"></i>
+                        <i class='bx bx-moon'></i>
                     <span class="link-name">Dark Mode</span>
                 </a>
 
@@ -535,10 +565,9 @@ nav.close ~ .dashboard .top{
 
     <section class="dashboard">
         <div class="top">
-            <i class="uil uil-bars sidebar-toggle"></i>
-
+            <i class='bx bx-menu sidebar-toggle'></i>
             <div class="search-box">
-                <i class="uil uil-search"></i>
+                <i class='bx bx-search-alt'></i>
                 <input type="text" placeholder="Search here...">
             </div>
             
@@ -548,23 +577,23 @@ nav.close ~ .dashboard .top{
         <div class="dash-content">
             <div class="overview">
                 <div class="title">
-                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <i class='bx bx-tachometer'></i>
                     <span class="text">Dashboard</span>
                 </div>
 
                 <div class="boxes">
                     <div class="box box1">
-                        <i class="uil uil-files-landscapes"></i>
+                        <i class='bx bx-folder-open'></i>
                         <span class="text">Total Docs</span>
                         <span class="number">{{data['docs']}}</span>
                     </div>
                     <div class="box box2">
-                        <i class="uil uil-comments"></i>
+                        <i class='bx bx-message-square-dots'></i>
                         <span class="text">Comments</span>
                         <span class="number">20,120</span>
                     </div>
                     <div class="box box3">
-                        <i class="uil uil-share"></i>
+                        <i class='bx bxs-share-alt'></i>
                         <span class="text">Total Share</span>
                         <span class="number">10,120</span>
                     </div>
@@ -573,17 +602,14 @@ nav.close ~ .dashboard .top{
 
             <div class="activity">
                 <div class="title">
-                    <i class="uil uil-clock-three"></i>
-                    <span class="text">Recent Activity</span>
+                    <i class='bx bxs-folder-open'></i>
+                    <span class="text">Queries</span>
                 </div>
 
                 <div class="activity-data">
+					<!--
                     <div class="data names">
                         <span class="data-title">Name</span>
-                        {% for i in list %}
-                        <span class="data-list">{{ i['q'] }}</span>
-                        <span class="data-list">{{ i['a'] }}</span>
-                        {% endfor %}
                         <span class="data-list">Deepa Chand</span>
                         <span class="data-list">Manisha Chand</span>
                         <span class="data-list">Pratima Shahi</span>
@@ -630,10 +656,25 @@ nav.close ~ .dashboard .top{
                         <span class="data-list">Liked</span>
                         <span class="data-list">Liked</span>
                         <span class="data-list">Liked</span>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
+		<form class="data email queries" action="https://dbm.sourav87.repl.co/add" method="POST">
+			<input name="q" >
+			<input name="a" >
+			<button type="submit">Add New</button>
+		</form>
+		<br>
+		{% for i in list %}
+		<form class="data email queries" action="https://dbm.sourav87.repl.co/add" method="POST">
+			<input name="q" value="{{i['q']}}">
+			<input name="a" value="{{i['a']}}">
+			<button type="submit">Update</button>
+		</form>
+		<br>
+		{% endfor %}
+
     </section>
 <input id="tkn" style="display:none;" value="{{token}}">
 <form class="hidden" action="https://dbm.sourav87.repl.co/v2" method="POST">
