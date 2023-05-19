@@ -36,6 +36,8 @@ def oauth():
     """
 	return render_template_string(script)
 
+
+
 @app.route("/v2", methods=["POST"])
 def verify():
 	data = request.form.to_dict()
