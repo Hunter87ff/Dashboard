@@ -21,6 +21,7 @@ def hello_world():
 def login():
 	return render_template("login.html", token=value)
 
+
 @app.route("/oauth", methods=["POST"])
 def oauth():
 	data = request.form.to_dict()
@@ -48,14 +49,22 @@ def verify():
 		return "<script>window.location.href='https://dbm.sourav87.repl.co/dashboard'</script>"
 	return "<script>window.location.href='https://dbm.sourav87.repl.co/login'</script>"
 		
-		
+dta = [{
+  "name" : :"hunter87",
+  "age" : 19
+},
+{
+  "name" : "sourav",
+  "age" : 19
+}]
 	
 @app.route("/dashboard")
 def dash():
-	key = request.args.get('key')
+	key = request.args.get('token')
 	data = request.cookies.get(key)
-	dta = {"name" : "hunter87", "age" : 19}
-	return render_template("index.html", token=value)
+	print(data)
+	#dta = {"name" : "hunter87", "age" : 19}
+	return render_template("index.html", token=value, list=dta)
 	
 
 app.run(host='0.0.0.0', port=8080)
