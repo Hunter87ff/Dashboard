@@ -56,11 +56,8 @@ def verify():
 	
 @app.route("/dashboard")
 def dash():
-	key = request.args.get('token')
-	data = request.cookies.get(key)
-	print(data)
-	#dta = {"name" : "hunter87", "age" : 19}
-	return render_template("index.html", token=value, list=docs)
+	data =  {"docs":len(list(docs))}
+	return render_template("index.html", token=value, list=docs, data=data)
 	
 
 app.run(host='0.0.0.0', port=8080)
