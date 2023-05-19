@@ -50,7 +50,7 @@ def verify():
 	return "<script>window.location.href='https://dbm.sourav87.repl.co/login'</script>"
 		
 dta = [{
-  "name" : :"hunter87",
+  "name":"hunter87",
   "age" : 19
 },
 {
