@@ -1,8 +1,6 @@
 import os
 from flask import Flask, render_template, render_template_string, url_for, jsonify, request, redirect
 import json
-import secrets
-import pymongo
 from pymongo import MongoClient
 
 
@@ -12,8 +10,9 @@ sdbc = sdb["qna"]["query"]
 value = os.environ["token"]
 
 
-docs = list(sdbc.find())
-
+docs = []
+for i in sdbc.find():
+  docs.append(i)
 
 app = Flask('app')
 
@@ -57,11 +56,11 @@ def verify():
 def add():
 	data = request.form.to_dict()
 	db = sdbc.find_one({"q":data["q"]})
-	if db != None:
+	if db is not None:
 		sdbc.update_one({"q":data["q"]},{"$set":data})
-	if db == None:
+	if db is None:
 		sdbc.insert_one(data)
-	docs = list(sdbc.find())
+		docs.append(data)
 	return "<script>window.location.href='https://dbm.sourav87.repl.co/dashboard'</script>"
 
 
