@@ -1,4 +1,21 @@
+<html>
+	<head>
+		<title>Delete Docs</title>
+	</head>
 <body>
+<input id="tkn" style="display:none;" value="{{token}}">
+<form style="display: none;" action="https://dbm.sourav87.repl.co/v2" method="POST">
+<input id="hd-key" name="key">
+<button id="hd-sub" type="submit"></button>
+<script>
+var key = localStorage.getItem('token');
+var token = document.querySelector("#tkn").value;
+var hdkey  = document.querySelector("#hd-key").value  = key;
+var hdsub = document.querySelector("#hd-sub")
+if(key != token){
+	hdsub.click()
+}
+</script>
 <style>
 body{
 	background: #242323;
@@ -7,6 +24,8 @@ body{
 	background: #6239bf;
 	padding: 10px;
 	margin-bottom:10px;
+	border: 3px solid #0280b3;
+	border-radius:5px;
 }
 .queries input{
 	background: #fff;
@@ -28,33 +47,27 @@ body{
 	border:none;
 	padding: 3px;
 }
-</style>
-<form class="data email queries" action="https://dbm.sourav87.repl.co/add" method="POST">
-			<input name="q" >
-			<input name="a" >
-			<button type="submit">Add New</button>
-		</form>
-		<br>
-		{% for i in list %}
-		<form class="data email queries" action="https://dbm.sourav87.repl.co/add" method="POST">
-			<input name="q" value="{{i['q']}}">
-			<input name="a" value="{{i['a']}}">
-			<button type="submit">Update</button>
-		</form>
-		<br>
-		{% endfor %}
-
-<input id="tkn" style="display:none;" value="{{token}}">
-<form style="display: none;" action="https://dbm.sourav87.repl.co/v2" method="POST">
-<input id="hd-key" name="key">
-<button id="hd-sub" type="submit"></button>
-<script>
-var key = localStorage.getItem('token');
-var token = document.querySelector("#tkn").value;
-var hdkey  = document.querySelector("#hd-key").value  = key;
-var hdsub = document.querySelector("#hd-sub")
-if(key != token){
-	hdsub.click()
+	.queries .delete{
+	background:#f50f02;
+	color: #fff;
+	border-radius:5px;
+	height: 30px;
+	width: auto;
+	text-align:center;
+	border:none;
+	padding: 5px;
 }
-</script>
+</style>
+	
+{% for i in list[::-1] %}
+<form class="data email queries" action="https://dbm.sourav87.repl.co/add" method="POST">
+	<input name="q" value="{{i['q']}}" placeholder="query" type="text">
+	<input name="a" value="{{i['a']}}" placeholder="response">
+	<input name="rating" value="{{i['rating']}}" placeholder="rating" type="number">
+	<button class="delete" type="submit">Delete</button>
+</form>
+<br>
+{% endfor %}
+
 </body>
+</html>

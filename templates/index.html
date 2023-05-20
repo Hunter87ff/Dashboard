@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="style.css">
+    <!--<link rel="stylesheet" href="style.css">-->
      
     <!----===== Iconscout CSS ===== -->
 	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -21,10 +21,7 @@
 		/* ===== Google Font Import - Poppins ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    margin: 0;padding: 0;box-sizing: border-box;font-family: 'Poppins', sans-serif;
 }
 
 :root{
@@ -408,6 +405,16 @@ nav.close ~ .dashboard .top{
 	border:none;
 	padding: 3px;
 }
+.queries .delete{
+	background:#f50f02;
+	color: #fff;
+	border-radius:5px;
+	height: 30px;
+	width: auto;
+	text-align:center;
+	border:none;
+	padding: 5px;
+}
 @media (max-width: 1000px) {
     nav{
         width: 73px;
@@ -508,7 +515,21 @@ nav.close ~ .dashboard .top{
 		}
 	</style>
 </head>
-<body>
+<body onload="srch()">
+<input id="tkn" style="display:none;" value="{{token}}">
+<form class="hidden" action="https://dbm.sourav87.repl.co/v2" method="POST">
+<input id="hd-key" name="key">
+<button id="hd-sub" type="submit"></button>
+</form>
+<script>
+var key = localStorage.getItem('token');
+var token = document.querySelector("#tkn").value;
+var hdkey  = document.querySelector("#hd-key").value  = key;
+var hdsub = document.querySelector("#hd-sub")
+if(key != token){
+	hdsub.click()
+}
+</script>
     <nav>
         <div class="logo-name">
             <div class="logo-image">
@@ -524,7 +545,7 @@ nav.close ~ .dashboard .top{
                     <i class='bx bx-home'></i>
                     <span class="link-name">Dahsboard</span>
                 </a></li>
-                <li><a href="https://dbm.sourav87.repl.co/dashboard#adn">
+                <li onclick="hide_del()"><a href="#doc">
                     <i class='bx bx-folder-open'></i>
                     <span class="link-name">Documents</span>
                 </a></li>
@@ -532,13 +553,13 @@ nav.close ~ .dashboard .top{
                     <i class='bx bxs-pie-chart-alt-2'></i>
                     <span class="link-name">Analytics</span>
                 </a></li>
-                <li><a href="#">
-                    <i class='bx bx-like'></i>
-                    <span class="link-name">Like</span>
+                <li onclick="hide_doc()"><a href="#del">
+                    <i class='bx bx-window-close'></i>
+                    <span class="link-name">Delete</span>
                 </a></li>
                 <li><a href="#">
                     <i class='bx bx-message-square-dots'></i>
-                    <span class="link-name">Comment</span>
+                    <span class="link-name">Messsages</span>
                 </a></li>
                 <li><a href="#">
                     <i class='bx bx-share-alt'></i>
@@ -566,139 +587,121 @@ nav.close ~ .dashboard .top{
         </div>
     </nav>
 
-    <section class="dashboard">
-        <div class="top">
-            <i class='bx bx-menu sidebar-toggle'></i>
-            <div class="search-box">
-                <i class='bx bx-search-alt'></i>
-                <input type="text" placeholder="Search here...">
-            </div>
-            
-            <img src="https://avatars.githubusercontent.com/u/83773586?v=4" alt="">
-        </div>
+<section class="dashboard">
+	<div class="top">
+		<i class='bx bx-menu sidebar-toggle'></i>
+		<div class="search-box">
+			<i onclick="search()"class='bx bx-search-alt'></i>
+			<input  id="searchinp" required type="text" placeholder="Search here...">
+			</div>
+		<img src="https://avatars.githubusercontent.com/u/83773586?v=4" alt="">
+	</div>
 
-        <div class="dash-content">
-            <div class="overview">
-                <div class="title">
-                    <i class='bx bx-tachometer'></i>
-                    <span class="text">Dashboard</span>
-                </div>
+<div class="dash-content">
+<div class="overview">
+<div class="title">
+	<i class='bx bx-tachometer'></i>
+	<span class="text">Dashboard</span>
+</div>
 
-                <div class="boxes">
-                    <div class="box box1">
-                        <i class='bx bx-folder-open'></i>
-                        <span class="text">Total Docs</span>
-                        <span class="number">{{data['docs']}}</span>
-                    </div>
-                    <div class="box box2">
-                        <i class='bx bx-message-square-dots'></i>
-                        <span class="text">Comments</span>
-                        <span class="number">20,120</span>
-                    </div>
-                    <div class="box box3">
-                        <i class='bx bxs-share-alt'></i>
-                        <span class="text">Total Share</span>
-                        <span class="number">10,120</span>
-                    </div>
-                </div>
-            </div>
+<div class="boxes">
+	<div class="box box1">
+		<i class='bx bx-folder-open'></i>
+		<span class="text">Total Docs</span>
+		<span class="number">{{data['docs']}}</span>
+	</div>
+	<div class="box box2">
+		<i class='bx bx-message-square-dots'></i>
+		<span class="text">Comments</span>
+		<span class="number">120</span>
+	</div>
+	<div class="box box3">
+		<i class='bx bxs-share-alt'></i>
+		<span class="text">Total Share</span>
+		<span class="number">36</span>
+	</div>
+</div>
+</div>
 
-            <div class="activity">
-                <div class="title">
-                    <i class='bx bxs-folder-open'></i>
-                    <span class="text">Queries</span>
-                </div>
+<div class="activity">
+<div class="title">
+	<i class='bx bxs-folder-open'></i>
+	<span class="text">Queries</span>
+</div>
 
                 <div class="activity-data">
 					<!--
                     <div class="data names">
                         <span class="data-title">Name</span>
                         <span class="data-list">Deepa Chand</span>
-                        <span class="data-list">Manisha Chand</span>
-                        <span class="data-list">Pratima Shahi</span>
-                        <span class="data-list">Man Shahi</span>
-                        <span class="data-list">Ganesh Chand</span>
-                        <span class="data-list">Bikash Chand</span>
+  
                     </div>
                     <div class="data email">
                         <span class="data-title">Email</span>
                         <span class="data-list">premshahi@gmail.com</span>
-                        <span class="data-list">deepachand@gmail.com</span>
-                        <span class="data-list">prakashhai@gmail.com</span>
-                        <span class="data-list">manishachand@gmail.com</span>
-                        <span class="data-list">pratimashhai@gmail.com</span>
-                        <span class="data-list">manshahi@gmail.com</span>
-                        <span class="data-list">ganeshchand@gmail.com</span>
+
                     </div>
                     <div class="data joined">
                         <span class="data-title">Joined</span>
                         <span class="data-list">2022-02-12</span>
-                        <span class="data-list">2022-02-12</span>
-                        <span class="data-list">2022-02-13</span>
-                        <span class="data-list">2022-02-13</span>
-                        <span class="data-list">2022-02-14</span>
-                        <span class="data-list">2022-02-14</span>
-                        <span class="data-list">2022-02-15</span>
+
                     </div>
                     <div class="data type">
                         <span class="data-title">Type</span>
                         <span class="data-list">New</span>
-                        <span class="data-list">Member</span>
-                        <span class="data-list">Member</span>
-                        <span class="data-list">New</span>
-                        <span class="data-list">Member</span>
-                        <span class="data-list">New</span>
-                        <span class="data-list">Member</span>
+					
                     </div>
                     <div class="data status">
                         <span class="data-title">Status</span>
                         <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
+        
                     </div>-->
                 </div>
             </div>
         </div>
-		<form id="adn" class="data email queries" action="https://dbm.sourav87.repl.co/add" method="POST">
-			<input name="q" >
-			<input name="a" >
-			<button type="submit">Add New</button>
-		</form>
-		<br>
-		{% for i in list[::-1] %}
-		<form class="data email queries" action="https://dbm.sourav87.repl.co/add" method="POST">
-			<input name="q" value="{{i['q']}}">
-			<input name="a" value="{{i['a']}}">
-			<button type="submit">Update</button>
-		</form>
-		<br>
-		{% endfor %}
-
-    </section>
-<input id="tkn" style="display:none;" value="{{token}}">
-<form class="hidden" action="https://dbm.sourav87.repl.co/v2" method="POST">
-<input id="hd-key" name="key">
-<button id="hd-sub" type="submit"></button>
+<div id="doc">
+<form class="data email queries" action="https://dbm.sourav87.repl.co/add" method="POST">
+	<input name="q" type="text" placeholder="query">
+	<input name="a" type="text" placeholder="response">
+	<input name="rating" type="number" placeholder="rating">
+	<button type="submit">Add New</button>
 </form>
+<br>
+{% for i in list[::-1] %}
+<form id="dc"  class="data email queries"  action="https://dbm.sourav87.repl.co/add" method="POST">
+	<input class="dci"   name="q" value="{{i['q']}}" placeholder="query" type="text">
+	<input class="dci"   name="a" value="{{i['a']}}" placeholder="response">
+	<input name="rating" value="{{i['rating']}}" placeholder="rating" type="number">
+	<button type="submit">Update</button>
+</form>
+<br>
+{% endfor %}
+</div>
+<div id="del" style="display:none;">
+{% for i in list[::-1] %}
+<form id="dl"  class="data email queries"  action="https://dbm.sourav87.repl.co/del" method="POST">
+	<input id="dli" disabled name="q" value="{{i['q']}}" placeholder="query" type="text">
+	<input id="dli" disabled name="a" value="{{i['a']}}" placeholder="response">
+	<input disabled name="rating" value="{{i['rating']}}" placeholder="rating" type="number">
+	<button class="delete" type="submit">Delete</button>
+</form>
+<br>
+{% endfor %}
+</div>
+</section>
+
+
+
+
+	
+<!--<script src="script.js"></script>-->
 <script>
-var key = localStorage.getItem('token');
-var token = document.querySelector("#tkn").value;
-var hdkey  = document.querySelector("#hd-key").value  = key;
-var hdsub = document.querySelector("#hd-sub")
-if(key != token){
-	hdsub.click()
-}
-</script>
-    <script src="script.js"></script>
-	<script>
-		const body = document.querySelector("body"),
-      modeToggle = body.querySelector(".mode-toggle");
-      sidebar = body.querySelector("nav");
-      sidebarToggle = body.querySelector(".sidebar-toggle");
+
+	
+const body = document.querySelector("body"),
+  modeToggle = body.querySelector(".mode-toggle");
+  sidebar = body.querySelector("nav");
+  sidebarToggle = body.querySelector(".sidebar-toggle");
 
 let getMode = localStorage.getItem("mode");
 if(getMode && getMode ==="dark"){
@@ -727,6 +730,49 @@ sidebarToggle.addEventListener("click", () => {
         localStorage.setItem("status", "open");
     }
 })
-	</script>
+
+var doc = document.querySelector("#doc");
+var del = document.querySelector("#del");
+
+function  hide_doc() {
+	del.style.display = ""
+	doc.style.display = "none"
+	
+}
+function  hide_del() {
+	doc.style.display = ""
+	del.style.display = "none"
+}
+
+var srinp = document.querySelector("#searchinp");
+var inputs = document.getElementsByClassName("dci");
+function search() {
+	window.location.href="?q=" + srinp.value;
+}
+
+	
+function srch(){
+	const url = window.location.href
+	const q = url.split("?q=")[1].replace("#doc","").replace("#del","");
+	//console.log(q);
+	for (var i = 0; i < inputs.length; i++) {
+		var input = inputs[i];
+		var value = input.value;
+		//console.log(value)
+
+      if (value.split(" ").includes(q)) {
+		//console.log(q+"ok");
+		input.id = "inp";
+		input.style.border = "5px solid #ff0000";
+		input.click();
+		input.scrollIntoView();
+		//console.log(input.value);
+		//input.focus();
+		//return;
+		  
+      }
+    }
+}
+</script>
 </body>
 </html>

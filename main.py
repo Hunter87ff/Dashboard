@@ -8,11 +8,14 @@ from pymongo import MongoClient
 sdb = MongoClient(os.environ["spdb"])
 sdbc = sdb["qna"]["query"]
 value = os.environ["token"]
+#sdbc.update_many({},{"$set":{"rating":0}})
+
 
 
 docs = []
 for i in sdbc.find():
-  docs.append(i)
+	#print(i)
+	docs.append(i)
 
 app = Flask('app')
 
@@ -51,7 +54,9 @@ def verify():
 	if {data['key']} == value:
 		return "<script>window.location.href='https://dbm.sourav87.repl.co/dashboard'</script>"
 	return "<script>window.location.href='https://dbm.sourav87.repl.co/login'</script>"
-		
+
+
+
 @app.route("/add", methods=["POST"])
 def add():
 	data = request.form.to_dict()
@@ -61,12 +66,25 @@ def add():
 	if db is None:
 		sdbc.insert_one(data)
 		docs.append(data)
-	return "<script>window.location.href='https://dbm.sourav87.repl.co/dashboard'</script>"
+	return "<script>window.location.href='https://dbm.sourav87.repl.co/dashboard#doc'</script>"
+
+
+@app.route("/del", methods=["POST"])
+def dell():
+	data = request.form.to_dict()
+	db = sdbc.find_one({"q":data["q"]})
+	if db is not None:
+		sdbc.delete_one({"q":data["q"]})
+		#docs.remove(data)
+	return "<script>window.location.href='https://dbm.sourav87.repl.co/dashboard#del'</script>"
+
 
 
 @app.route("/docs")
 def doc():
 	return render_template("docs.html", list=docs, token=value)
+
+
 
 @app.route("/dashboard")
 def dash():
