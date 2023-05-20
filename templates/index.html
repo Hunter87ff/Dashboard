@@ -669,7 +669,7 @@ nav.close ~ .dashboard .top{
 			<button type="submit">Add New</button>
 		</form>
 		<br>
-		{% for i in list %}
+		{% for i in list[::-1] %}
 		<form class="data email queries" action="https://dbm.sourav87.repl.co/add" method="POST">
 			<input name="q" value="{{i['q']}}">
 			<input name="a" value="{{i['a']}}">
