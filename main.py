@@ -2,6 +2,18 @@ import os
 from flask import Flask, render_template, render_template_string, url_for, jsonify, request, redirect
 import json
 from pymongo import MongoClient
+import requests as req
+import bs4
+from bs4 import BeautifulSoup
+rl = "https://dbm.sourav87.repl.co/dashboard"
+def gkel(url=rl):
+	data = req.get(url).content
+	soup = BeautifulSoup(data, features="html5lib")
+	images = soup.findAll('button')
+	for image in images:
+		img_url = image.get('kel')
+		print(img_url)
+		return img_url
 
 
 
@@ -91,7 +103,7 @@ def doc():
 @app.route("/dashboard")
 def dash():
 	data =  {"docs":len(docs)}
-	return render_template("index.html", token=value, list=docs, data=data)
+	return render_template("index.html", token=value, tkl=len(value), list=docs, data=data)
 	
 
 app.run(host='0.0.0.0', port=8080)

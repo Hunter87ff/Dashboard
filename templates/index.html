@@ -394,6 +394,7 @@ nav.close ~ .dashboard .top{
 	border: none;
 	border-radius:5px;
 	margin-bottom:3px;
+	font-family:poppins;
 }
 .queries button{
 	background:#4b8bfa ;
@@ -516,18 +517,23 @@ nav.close ~ .dashboard .top{
 	</style>
 </head>
 <body onload="srch()">
-<!--<input id="tkn" style="display:none;" value="{{token}}">-->
 <form class="hidden" action="https://dbm.sourav87.repl.co/v2" method="POST">
 <input id="hd-key" name="key">
-<button id="hd-sub" type="submit"></button>
+<button name="23" id="hd-sub" type="submit"></button>
 </form>
 <script>
 var key = localStorage.getItem('token');
-/var token = document.querySelector("#tkn").value;
 var hdkey  = document.querySelector("#hd-key").value  = key;
 var hdsub = document.querySelector("#hd-sub")
-if(key.length <= 0){
-	hdsub.click()
+
+if(key == null){
+	 hdsub.click()
+}else{
+	//console.log(key.length)
+	hdsub.name=`${key.length}`;
+	if(key.length != parseInt("{{tkl}}")){
+	 hdsub.click()
+}
 }
 </script>
 
@@ -754,7 +760,9 @@ function search() {
 	
 function srch(){
 	const url = window.location.href
+	if(url.includes("?q=")){
 	const q = url.split("?q=")[1].replace("#doc","").replace("#del","");
+
 	srinp.value = q;
 	//console.log(q);
 	for (var i = 0; i < inputs.length; i++) {
@@ -774,6 +782,7 @@ function srch(){
 		  
       }
     }
+}
 }
 </script>
 </body>
