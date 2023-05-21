@@ -763,7 +763,7 @@ function srch(){
 	if(url.includes("?q=")){
 	const q = url.split("?q=")[1].replace("#doc","").replace("#del","");
 	if(q.includes("%20")){
-	  q = q.replace("%20"," ")
+	  const q = q.replace("%20"," ")
 	}
 
 	srinp.value = q;
