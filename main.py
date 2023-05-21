@@ -48,7 +48,9 @@ def oauth():
 @app.route("/v2", methods=["POST"])
 def verify():
 	data = request.form.to_dict()
-	print(data)
+	key = request.args.get('token')
+	print(data['key'], key)
+	#print(data)
 	if "key" not in data:
 		return "<script>window.location.href='https://dbm.sourav87.repl.co/login'</script>"
 	if {data['key']} == value:
