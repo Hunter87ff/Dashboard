@@ -761,7 +761,7 @@ function search() {
 function srch(){
 	const url = window.location.href
 	if(url.includes("?q=")){
-	const q = url.split("?q=")[1].replace("#doc","").replace("#del","").replace("%20/g"," ");
+	const q = url.split("?q=")[1].replace("#doc","").replace("#del","").replace("/%20/g"," ");
 
 	srinp.value = q;
 	//console.log(q);
