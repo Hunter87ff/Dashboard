@@ -33,7 +33,7 @@ app = Flask('app')
 
 @app.route('/')
 def hello_world():
-  return 'Hello, World!'
+  return '<script>window.location.href="/login"</script>'
 
 @app.route("/login")
 def login():
