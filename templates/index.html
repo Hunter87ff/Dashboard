@@ -754,6 +754,7 @@ function search() {
 function srch(){
 	const url = window.location.href
 	const q = url.split("?q=")[1].replace("#doc","").replace("#del","");
+	srinp.value = q;
 	//console.log(q);
 	for (var i = 0; i < inputs.length; i++) {
 		var input = inputs[i];
