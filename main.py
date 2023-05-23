@@ -6,7 +6,7 @@ import requests as req
 import bs4
 from bs4 import BeautifulSoup
 
-git_key = os.environ['git_key']
+#git_key = os.environ['git_key']
 git_log = os.environ["git_log"]
 
 
@@ -46,7 +46,7 @@ def login():
 	return render_template("login.html", token=value)
 	
 	
-@app.route(f"/git_log?key={git_key}", methods=["POST"])
+@app.route(f"/git_log", methods=["POST"])
 def gitl():
   data = request.jsonify()
   print(data)
