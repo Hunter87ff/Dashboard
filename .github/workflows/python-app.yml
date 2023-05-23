@@ -14,7 +14,7 @@ permissions:
 env:
   spdb : ${{ secrets.SPDB }}
   token : ${{ secrets.TOKEN }}
-  apass : ${{secrets.APASS }}
+  apass : ${{ secrets.APASS }}
   amail : ${{ secrets.AMAIL }}
   
 jobs:
