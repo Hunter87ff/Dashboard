@@ -11,7 +11,12 @@ on:
 
 permissions:
   contents: read
-
+env:
+  spdb : ${{ secrets.SPDB }}
+  token : ${{ secrets.TOKEN }}
+  apass : ${{secrets.APASS }}
+  amail : ${{ AMAIL }}
+  
 jobs:
   build:
 
