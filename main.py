@@ -19,9 +19,9 @@ def gkel(url=rl):
 
 
 
-sdb = MongoClient(os.environ["SPDB"])
+sdb = MongoClient(os.environ["spdb"])
 sdbc = sdb["qna"]["query"]
-value = os.environ["TOKEN"]
+value = os.environ["token"]
 #sdbc.update_many({},{"$set":{"rating":0}})
 
 
@@ -47,9 +47,9 @@ def oauth():
 	data = request.form.to_dict()
 	print(data)
 	#token = secrets.token_hex(16)
-	if data["email"] != os.environ["AMAIL"]:
+	if data["email"] != os.environ["amail"]:
 		return "You've Entered Wrong Email"
-	if data["pass"] != os.environ["APASS"]:
+	if data["pass"] != os.environ["apass"]:
 		return "You've Entered Wrong Password"
 	script = f"""<!DOCTYPE html><script>localStorage.setItem('token', '{value}');
  window.location.href='https://dbm.sourav87.repl.co/dashboard';
