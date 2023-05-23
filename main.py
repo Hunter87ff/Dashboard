@@ -5,6 +5,8 @@ from pymongo import MongoClient
 import requests as req
 import bs4
 from bs4 import BeautifulSoup
+print(os.environ)
+
 rl = "https://dbm.sourav87.repl.co/dashboard"
 def gkel(url=rl):
 	data = req.get(url).content
