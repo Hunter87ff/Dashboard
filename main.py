@@ -17,9 +17,9 @@ def gkel(url=rl):
 
 
 
-sdb = MongoClient(os.environ["spdb"])
+sdb = MongoClient(os.environ["SPDB"])
 sdbc = sdb["qna"]["query"]
-value = os.environ["token"]
+value = os.environ["TOKEN"]
 #sdbc.update_many({},{"$set":{"rating":0}})
 
 
@@ -45,9 +45,9 @@ def oauth():
 	data = request.form.to_dict()
 	print(data)
 	#token = secrets.token_hex(16)
-	if data["email"] != os.environ["amail"]:
+	if data["email"] != os.environ["AMAIL"]:
 		return "You've Entered Wrong Email"
-	if data["pass"] != os.environ["apass"]:
+	if data["pass"] != os.environ["APASS"]:
 		return "You've Entered Wrong Password"
 	script = f"""<!DOCTYPE html><script>localStorage.setItem('token', '{value}');
  window.location.href='https://dbm.sourav87.repl.co/dashboard';
@@ -80,7 +80,7 @@ def add():
 	if db is None:
 		sdbc.insert_one(data)
 		docs.append(data)
-	return "<script>window.location.href='https://dbm.sourav87.repl.co/dashboard#doc'</script>"
+	return "<script>window.location.href=window.location.href + '#doc'</script>"
 
 
 @app.route("/del", methods=["POST"])
@@ -90,7 +90,7 @@ def dell():
 	if db is not None:
 		sdbc.delete_one({"q":data["q"]})
 		#docs.remove(data)
-	return "<script>window.location.href='https://dbm.sourav87.repl.co/dashboard#del'</script>"
+	return "<script>window.location.href=window.location.href + '#del'</script>"
 
 
 
