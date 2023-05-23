@@ -1,2 +1,5 @@
 flask
 requests
+bs4
+pymongo==4.2.0
+pymongo[srv]
