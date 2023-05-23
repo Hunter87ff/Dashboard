@@ -50,7 +50,8 @@ def login():
 def gitl():
   data = request.jsonify()
   print(data)
-  req.post(url=git_log, json={'content':f"```js\n{data}\n```""})
+  req.post(url=git_log, json={'content':f"```js\n{data}\n```"})
+  return 'sent'
   
 
 @app.route("/oauth", methods=["POST"])
