@@ -6,6 +6,10 @@ import requests as req
 import bs4
 from bs4 import BeautifulSoup
 
+git_key = os.environ['git_key']
+git_log = os.environ["git_log"]
+
+
 
 rl = "https://dbm.sourav87.repl.co/dashboard"
 def gkel(url=rl):
@@ -40,7 +44,14 @@ def hello_world():
 @app.route("/login")
 def login():
 	return render_template("login.html", token=value)
-
+	
+	
+@app.route(f"/git_log?key={git_key}", methods=["POST"])
+def gitl():
+  data = request.jsonify()
+  print(data)
+  req.post(url=git_log, json={'content':f"```js\n{data}\n```""})
+  
 
 @app.route("/oauth", methods=["POST"])
 def oauth():
